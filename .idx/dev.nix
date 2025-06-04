@@ -6,15 +6,13 @@
 
   # Use https://search.nixos.org/packages to find packages
   packages = [
-    # pkgs.go
-    # pkgs.python311
-    # pkgs.python311Packages.pip
-    # pkgs.nodejs_20
-    # pkgs.nodePackages.nodemon
+    pkgs.python312
+    pkgs.python312Packages.pip
+    pkgs.uv
   ];
 
   # Sets environment variables in the workspace
-  env = {};
+  env = { };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -25,16 +23,17 @@
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and show it in IDX's web preview panel
-        #   command = ["npm" "run" "dev"];
-        #   manager = "web";
-        #   env = {
-        #     # Environment variables to set for your server
-        #     PORT = "$PORT";
-        #   };
-        # };
+        web = {
+          # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
+          # and show it in IDX's web preview panel
+          command = [ "app/gemini-demo/.venv/bin/python" "-m" "uvicorn" "app.gemini-demo.main:app" "--host" "0.0.0.0" "--port" "$PORT" "--reload" ];
+          manager = "web";
+          env = {
+            # Environment variables to set for your server
+            PORT = "$PORT";
+          };
+        };
+
       };
     };
 
@@ -44,6 +43,9 @@
       onCreate = {
         # Example: install JS dependencies from NPM
         # npm-install = "npm install";
+        # Install Python dependencies using uv
+        uv-creave-venv = "cd app/gemini-demo && uv venv";
+        uv-sync-web = "cd app/gemini-demo && uv sync";
       };
       # Runs when the workspace is (re)started
       onStart = {
