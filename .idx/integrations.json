@@ -2,6 +2,10 @@
   "cloud_run_deploy": {
     "region": "us-east1",
     "sourceFlag": "--source app/gemini-demo",
-    "allowUnauthenticatedInvocationsFlag": "--allow-unauthenticated"
+    "allowUnauthenticatedInvocationsFlag": "--allow-unauthenticated",
+    "runBuildSteps": [
+      "cd app/gemini-demo && uv venv",
+      "cd app/gemini-demo && uv sync"
+    ]
   }
 }
