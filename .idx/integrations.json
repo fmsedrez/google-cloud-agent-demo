@@ -1,0 +1,7 @@
+{
+  "cloud_run_deploy": {
+    "region": "us-east1",
+    "sourceFlag": "--source app/gemini-demo",
+    "allowUnauthenticatedInvocationsFlag": "--allow-unauthenticated"
+  }
+}
