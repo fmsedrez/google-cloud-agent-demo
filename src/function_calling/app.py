@@ -1,5 +1,12 @@
 import streamlit as st
 
+
+st.set_page_config(
+    page_title="Gemini Demo - Streamlit App",
+    page_icon='💬',
+    layout='centered'
+)
+
 st.title("Gemini Demo - Streamlit App")
 
 st.write("Hello, this is a simple Streamlit app running alongside your FastAPI backend!")

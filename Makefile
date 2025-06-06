@@ -10,4 +10,7 @@ api:
 streamlit:
 	.venv/bin/streamlit run src/function_calling/app.py --server.port 8501
 
+gemini:
+	.venv/bin/streamlit run src/chatbot_gemini/app.py --server.port 8502
+
 all: venv sync api 
