@@ -13,4 +13,7 @@ streamlit:
 gemini:
 	.venv/bin/streamlit run src/chatbot_gemini/app.py --server.port 8502
 
-all: venv sync api 
+adk:
+	adk web src/agents
+
+# all: venv sync api streamlit gemini adk
