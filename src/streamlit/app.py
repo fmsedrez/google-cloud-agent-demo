@@ -17,7 +17,7 @@ q = st.text_input("Query parameter (q)")
 if st.button("Get Item from FastAPI"):
     import requests
     params = {"q": q} if q else {}
-    response = requests.get(f"http://localhost:8500/items/{item_id}", params=params)
+    response = requests.get(f"http://localhost:8500/stock/{item_id}", params=params)
     if response.ok:
         st.json(response.json())
     else:
