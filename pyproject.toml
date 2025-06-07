@@ -1,0 +1,18 @@
+[project]
+name = "gemini-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.12",
+    "google-adk>=1.2.1",
+    "google-generativeai>=0.8.5",
+    "langchain>=0.3.25",
+    "langchain-community>=0.3.24",
+    "langchain-google-genai>=2.0.10",
+    "langgraph>=0.4.8",
+    "python-dotenv>=1.1.0",
+    "streamlit>=1.45.1",
+    "uvicorn>=0.29.0",
+]
