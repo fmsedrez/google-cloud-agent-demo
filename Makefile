@@ -16,6 +16,9 @@ gemini:
 langchain:
 	.venv/bin/streamlit run src/chatbot_langchain_gemini/app.py --server.port 8503
 
+langchain_tool:
+	.venv/bin/streamlit run src/chatbot_langchain_gemini_tool/app.py --server.port 8504
+
 adk:
 	adk web src/agents
 
