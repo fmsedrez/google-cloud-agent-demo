@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import streamlit as st
 import google.generativeai as genai
 
+GEMINI_MODEL = "gemini-2.5-flash"
+
 load_dotenv()
 
 def fetch_gemini_response(user_query):
@@ -29,7 +31,7 @@ gemini_api_key = os.getenv("GEMINI_API_KEY")
 if gemini_api_key:
     st.session_state["API_KEY"] = gemini_api_key
     genai.configure(api_key=gemini_api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash-preview-05-20")
+    model = genai.GenerativeModel(model_name=GEMINI_MODEL)
     os.environ["API_KEY"] = gemini_api_key
     
 
@@ -49,7 +51,7 @@ st.sidebar.markdown(
 if api_key:
     st.session_state["API_KEY"] = api_key
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-pro-preview-06-05")
+    model = genai.GenerativeModel(model_name=GEMINI_MODEL)
     os.environ["API_KEY"] = api_key
 else:
     st.error("Please add your Gemini API key to continue.")
