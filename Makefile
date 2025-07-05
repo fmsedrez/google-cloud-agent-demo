@@ -15,16 +15,16 @@ api: ## Inicia o servidor FastAPI
 	.venv/bin/uvicorn src.api.main:app --host 127.0.0.1 --port 8500 --reload
 
 streamlit: ## Inicia o servidor Streamlit
-	.venv/bin/streamlit run src/chatbot_streamlit/app.py --server.port 8501
+	.venv/bin/streamlit run src/chatbot_streamlit/app.py --server.port 8501 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
 gemini: ## Inicia o servidor Gemini
-	.venv/bin/streamlit run src/chatbot_gemini/app.py --server.port 8502
+	.venv/bin/streamlit run src/chatbot_gemini/app.py --server.port 8502 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
 langchain: ## Inicia o servidor Langchain
-	.venv/bin/streamlit run src/chatbot_langchain_gemini/app.py --server.port 8503
+	.venv/bin/streamlit run src/chatbot_langchain_gemini/app.py --server.port 8503 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
 langchain_tool: ## Inicia o servidor Langchain Tool
-	.venv/bin/streamlit run src/chatbot_langchain_gemini_tool/app.py --server.port 8504
+	.venv/bin/streamlit run src/chatbot_langchain_gemini_tool/app.py --server.port 8504 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
-adk:
+adk: ## Inicia o servidor ADK
 	adk web src/agents
