@@ -11,6 +11,9 @@ venv: ## Cria o ambiente virtual
 sync: ## Sincroniza as dependências
 	uv sync
 
+source: ## Ativa o ambiente virtual
+	source .venv/bin/activate
+
 api: ## Inicia o servidor FastAPI
 	.venv/bin/uvicorn src.api.main:app --host 127.0.0.1 --port 8500 --reload
 
