@@ -27,3 +27,6 @@ async def read_stock(item_name: str):
         return {"item": item_name, "quantity": quantity}
     else:
         return {"error": "Item not found in stock."}
+
+
+# Use a sua criatividade para uma nova rota
