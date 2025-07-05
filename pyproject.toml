@@ -14,5 +14,6 @@ dependencies = [
     "langgraph>=0.4.8",
     "python-dotenv>=1.1.0",
     "streamlit>=1.45.1",
+    "toolbox-core>=0.2.1",
     "uvicorn>=0.29.0",
 ]
