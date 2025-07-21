@@ -30,4 +30,4 @@ langchain_tool: ## Inicia o servidor Langchain Tool
 	.venv/bin/streamlit run src/chatbot_langchain_gemini_tool/app.py --server.port 8504 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
 adk: ## Inicia o servidor ADK
-	adk web src/agents
+	.venv/bin/adk web src/agents
