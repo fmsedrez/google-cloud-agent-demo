@@ -1,33 +1,48 @@
 .PHONY: help
 
-help: ## Exibe a ajuda
+help: ## Show this help message
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 .DEFAULT_GOAL := help
 
-venv: ## Cria o ambiente virtual
+venv: ## Create a virtual environment
 	uv venv .venv
 
-sync: ## Sincroniza as dependências
+sync: ## Syncronize the virtual environment with the requirements
 	uv sync
 
-source: ## Ativa o ambiente virtual
+source: ## Activate the virtual environment
 	source .venv/bin/activate
 
-api: ## Inicia o servidor FastAPI
+gcloud_login: ## Login to Google Cloud
+	gcloud auth application-default login --no-launch-browser
+
+gcloud_ai_enable: ## Enable Google Cloud AI services
+	gcloud services enable aiplatform.googleapis.com
+
+api: ## Start the fastAPI server on port 8500
 	.venv/bin/uvicorn src.api.main:app --host 127.0.0.1 --port 8500 --reload
 
-streamlit: ## Inicia o servidor Streamlit
+streamlit: ## Start the Streamlit server on port 8501
 	.venv/bin/streamlit run src/chatbot_streamlit/app.py --server.port 8501 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
-gemini: ## Inicia o servidor Gemini
+gemini: ## Start the Gemini chatbot server on port 8502
 	.venv/bin/streamlit run src/chatbot_gemini/app.py --server.port 8502 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
-langchain: ## Inicia o servidor Langchain
+langchain: ## Start the Langchain chatbot server on port 8503
 	.venv/bin/streamlit run src/chatbot_langchain_gemini/app.py --server.port 8503 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
-langchain_tool: ## Inicia o servidor Langchain Tool
+langchain_tool: ## Start the Langchain chatbot with Gemini tool server on port 8504
 	.venv/bin/streamlit run src/chatbot_langchain_gemini_tool/app.py --server.port 8504 --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false
 
-adk: ## Inicia o servidor ADK
-	adk web src/agents
+adk: ## Start ADK Server
+	uv run adk web src/agents --port 8505
+
+adk_api: ## Start ADK API Server
+	uv run adk api src/agents --port 8506
+
+mcp_server: ## Start MCP Server
+	uv run --directory src/mcp adk_mcp_server.py
+
+mcp_client: ## Start MCP Client
+	uv run adk web src/mcp --port 8507
