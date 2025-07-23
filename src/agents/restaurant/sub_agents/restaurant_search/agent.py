@@ -10,6 +10,7 @@ MODEL = "gemini-2.5-pro"
 restaurant_search_agent = Agent(
     model=MODEL,
     name="restaurant_search_agent",
+    description="Agente que pode pesquisar informações sobre restarantes na internet",
     instruction=prompt.restaurant_search_prompt(),
     tools=[google_search]
 )

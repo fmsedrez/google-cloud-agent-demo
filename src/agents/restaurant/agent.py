@@ -4,7 +4,7 @@ from google.adk.agents import LlmAgent
 from google.adk.tools.agent_tool import AgentTool
 
 from . import prompt
-# from .sub_agents.academic_newresearch import academic_newresearch_agent
+from .sub_agents.restaurant_concierge import restaurant_concierge_agent
 from .sub_agents.restaurant_search import restaurant_search_agent
 
 MODEL = "gemini-2.5-pro"
@@ -21,7 +21,7 @@ agent_coordinator = LlmAgent(
     ),
     instruction=prompt.root_agent_instructions(),
     tools=[
-        # AgentTool(agent=academic_websearch_agent),
+        AgentTool(agent=restaurant_concierge_agent),
         AgentTool(agent=restaurant_search_agent),
     ],
 )
