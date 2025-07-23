@@ -1,10 +1,11 @@
+import os
+
 from google.adk.agents import LlmAgent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 
 from .prompts import root_agent_instructions
 
 MODEL = "gemini-2.5-flash"
-MCP_SERVER_SCRIPT = "src/mcp/adk_mcp_server.py"
 
 root_agent = LlmAgent(
     model=MODEL,
@@ -14,8 +15,11 @@ root_agent = LlmAgent(
     tools=[
         MCPToolset(
             connection_params=StdioServerParameters(
-                command='python3',
-                args=[MCP_SERVER_SCRIPT],
+                command='uv',
+                args=["--directory",
+                      os.path.join(os.path.dirname(os.path.abspath(__file__)), "../"),
+                      "run",
+                      "adk_mcp_server.py"],
             )
         )
     ],
