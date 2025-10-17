@@ -1,6 +1,7 @@
 # google-cloud-agent-demo
 
 ## Passo a Passo para rodar os demos do ADK
+* Acessar esse repo: https://github.com/fmsedrez/google-cloud-agent-demo/
 * Acessar o site: https://shell.cloud.google.com/
 * Instalar o UV:
   * No terminal do Google Cloud Shell, digitar:
@@ -19,19 +20,27 @@
 * Certifique-se que a API do Vertex AI está ativada no seu projeto do Google Cloud.
   * Usando o gcloud CLI, você pode ativar a API com o seguinte comando:
     * `gcloud services enable aiplatform.googleapis.com`
+    * `gcloud services enable geminidataanalytics.googleapis.com`
 * Garantir que você tem uma conta no Google Cloud com permissão de acessar e usar o projeto.
   * São os seguintes papéis para o usuário:
     * `roles/serviceusage.serviceUsageConsumer`
     * `roles/aiplatform.user`
+    * `roles/bigquery.user` (se for usar BigQuery)
     * Usando os commandos: 
       * gcloud projects add-iam-policy-binding <ID_DO_PROJETO> --member='user:<SEU_EMAIL>' --role='roles/aiplatform.user'
       * gcloud projects add-iam-policy-binding <ID_DO_PROJETO> --member='user:<SEU_EMAIL>' --role='roles/serviceusage.serviceUsageConsumer'
+      * gcloud projects add-iam-policy-binding <ID_DO_PROJETO> --member='user:<SEU_EMAIL>' --role='roles/bigquery.user'
 * Ativar a conta padrão do Google Cloud Shell:
   * No terminal digitar: `gcloud auth application-default login --no-launch-browser`
 * Criar o ambiente virtual:
   * `make venv`
 * Baixar as dependências do projeto:
   * `make sync`
+* Instalar esse projeto:
+  * No terminal digitar: `uv install -e .`
+* Configurar variáveis de ambiente:
+  * `uv run setenv`
+  * eval $(uv run setenv --export)
 
 ## Comentários e melhorias sugeridas
 
@@ -77,7 +86,8 @@ Estas são sugestões para tornar o passo a passo mais completo e fácil de segu
 
 - Troubleshooting rápido
   - `uv: command not found`: rode `source $HOME/.local/bin/env` ou reinicie o terminal.
-  - Permissão negada ao chamar Vertex AI: verifique `gcloud config get-value project`, os papéis IAM, e se a API `aiplatform.googleapis.com` está habilitada.
+  - Permissão negada ao chamar Vertex AI: verifique `gcloud config get-value project`, os papéis IAM, e se as APIs 
+    `aiplatform.googleapis.com` e `geminidataanalytics.googleapis.com` estão habilitadas.
   - Variáveis ausentes: confira se o arquivo `.env` foi criado a partir do `.env.template` correto.
   - Porta em uso: mude a porta (ex.: `uv run adk web src/agents --port 8081`) ou finalize o processo anterior.
 
