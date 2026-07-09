@@ -88,6 +88,16 @@ Estas são sugestões para tornar o passo a passo mais completo e fácil de segu
   - `uv: command not found`: rode `source $HOME/.local/bin/env` ou reinicie o terminal.
   - Permissão negada ao chamar Vertex AI: verifique `gcloud config get-value project`, os papéis IAM, e se as APIs 
     `aiplatform.googleapis.com` e `geminidataanalytics.googleapis.com` estão habilitadas.
+  - Erro `oauth2/google: invalid token JSON from metadata: EOF` ou `User authorization is required`:
+    Ocorre quando as credenciais de autenticação (ADC) estão ausentes ou foram salvas em caminhos temporários do sandbox. Para resolver:
+    1. No terminal, execute `make gcloud_login` para autenticar seu usuário.
+    2. Copie as credenciais geradas do ambiente temporário para a pasta padrão do usuário executando:
+       ```bash
+       make copy_adc
+       ```
+    3. Pare e reinicie o servidor do agente (`make adk`).
+  - Erros de limite de requisições 429 (`RESOURCE_EXHAUSTED`):
+    Os agentes usam um helper centralizado (`src/agents/model_helper.py`) que configura retentativas automáticas com backoff exponencial. Se o limite persistir devido à cota da região, altere `GOOGLE_CLOUD_LOCATION` no seu `.env` para `us-central1`.
   - Variáveis ausentes: confira se o arquivo `.env` foi criado a partir do `.env.template` correto.
   - Porta em uso: mude a porta (ex.: `uv run adk web src/agents --port 8081`) ou finalize o processo anterior.
 
