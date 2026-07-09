@@ -22,16 +22,13 @@ copy_adc: ## Copy generated ADC credentials from temporary/sandbox path to stand
 	@if [ -n "$$GOOGLE_APPLICATION_CREDENTIALS" ] && [ -f "$$GOOGLE_APPLICATION_CREDENTIALS" ]; then \
 		cp "$$GOOGLE_APPLICATION_CREDENTIALS" "$(HOME)/.config/gcloud/application_default_credentials.json"; \
 		echo "✓ Credentials copied from $$GOOGLE_APPLICATION_CREDENTIALS to ~/.config/gcloud/application_default_credentials.json"; \
-	elif [ -f "/tmp/tmp.bEtleB6nsd/application_default_credentials.json" ]; then \
-		cp "/tmp/tmp.bEtleB6nsd/application_default_credentials.json" "$(HOME)/.config/gcloud/application_default_credentials.json"; \
-		echo "✓ Credentials copied from /tmp/tmp.bEtleB6nsd/application_default_credentials.json to ~/.config/gcloud/application_default_credentials.json"; \
 	else \
 		TEMP_ADC=$$(find /tmp -name "application_default_credentials.json" -type f 2>/dev/null | head -n 1); \
 		if [ -n "$$TEMP_ADC" ] && [ -f "$$TEMP_ADC" ]; then \
 			cp "$$TEMP_ADC" "$(HOME)/.config/gcloud/application_default_credentials.json"; \
 			echo "✓ Credentials copied from $$TEMP_ADC to ~/.config/gcloud/application_default_credentials.json"; \
 		else \
-			echo "Error: No credentials file found. Please run 'make gcloud_login' first."; \
+			echo "Error: No credentials file found in \$$GOOGLE_APPLICATION_CREDENTIALS or /tmp. Please run 'make gcloud_login' first."; \
 			exit 1; \
 		fi; \
 	fi
