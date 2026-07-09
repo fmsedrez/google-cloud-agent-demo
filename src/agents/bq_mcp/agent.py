@@ -7,7 +7,7 @@ from . import prompt
 
 bigquery_toolbox = ToolboxSyncClient("http://127.0.0.1:5000")
 bigquery_toolset = bigquery_toolbox.load_toolset()
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini-2.5-flash"
 # MCP configuration for BigQuery
 # Note: Requires MCP server configuration for BigQuery in your environment
 bq_mcp_agent = Agent(

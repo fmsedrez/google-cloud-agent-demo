@@ -4,7 +4,7 @@ from google.adk.agents import LlmAgent
 
 from . import prompt
 
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini-2.5-flash"
 
 from google.adk.tools.bigquery import BigQueryCredentialsConfig
 from google.adk.tools.bigquery import BigQueryToolset
@@ -18,6 +18,13 @@ import google.auth
 tool_config = BigQueryToolConfig(write_mode=WriteMode.BLOCKED)
 # Initialize the tools to use the application default credentials.
 application_default_credentials, _ = google.auth.default()
+from google.auth.transport.requests import Request
+if hasattr(application_default_credentials, "refresh"):
+    try:
+        application_default_credentials.refresh(Request())
+    except Exception:
+        pass
+
 credentials_config = BigQueryCredentialsConfig(
     credentials=application_default_credentials
 )

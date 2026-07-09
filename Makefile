@@ -25,3 +25,6 @@ adk: ## Start ADK Server
 
 adk_api: ## Start ADK API Server
 	uv run adk api src/agents --port 8506
+
+toolbox: ## Start toolbox for prebuild bigquery
+	./toolbox --prebuilt bigquery --stdio --enable-api
