@@ -5,7 +5,7 @@ from google.adk.tools import google_search
 
 from . import prompt
 
-MODEL = "gemini-2.5-flash-lite"
+MODEL = "gemini-3.5-flash-lite"
 
 planner_agent = LlmAgent(
     model=MODEL,
