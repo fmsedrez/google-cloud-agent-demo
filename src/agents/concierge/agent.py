@@ -5,7 +5,7 @@ from . import prompt
 
 # Unified Concierge agent with all specializations
 concierge_agent = LlmAgent(
-    model='gemini-2.5-pro',
+    model='gemini-3.1-pro-preview',
     name="ConciergeAgent",
     description="Concierge inteligente especializado em transporte, gastronomia (chef), harmonização (sommelier), planejamento de experiências e hospedagem/reservas",
     instruction=prompt.concierge_prompt(),
